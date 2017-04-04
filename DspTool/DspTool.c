@@ -1,14 +1,5 @@
 #include "dsptool.h"
 
-#define BYTES_PER_FRAME 8
-#define SAMPLES_PER_FRAME 14
-#define NIBBLES_PER_FRAME 16
-
-void encode(int16_t* src, uint8_t* dst, ADPCMINFO *cxt, uint32_t samples)
-{
-
-}
-
 void decode(uint8_t* src, int16_t* dst, ADPCMINFO *cxt, uint32_t samples)
 {
 

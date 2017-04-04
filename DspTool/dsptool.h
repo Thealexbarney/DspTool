@@ -1,14 +1,9 @@
 #pragma once
 #include <stdint.h>
 
-//__declspec(dllexport) uint32_t getBytesForAdpcmBuffer(uint32_t samples);
-//__declspec(dllexport) uint32_t getBytesForAdpcmSamples(uint32_t samples);
-//__declspec(dllexport) uint32_t getBytesForPcmBuffer(uint32_t samples);
-//__declspec(dllexport) uint32_t getBytesForPcmSamples(uint32_t samples);
-//__declspec(dllexport) uint32_t getNibbleAddress(uint32_t samples);
-//__declspec(dllexport) uint32_t getNibblesForNSamples(uint32_t samples);
-//__declspec(dllexport) uint32_t getSampleForAdpcmNibble(uint32_t nibble);
-//__declspec(dllexport) uint32_t getBytesForAdpcmInfo(void);
+#define BYTES_PER_FRAME 8
+#define SAMPLES_PER_FRAME 14
+#define NIBBLES_PER_FRAME 16
 
 typedef struct
 {

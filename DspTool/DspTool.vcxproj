@@ -145,9 +145,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dsptool.h" />
+    <ClInclude Include="internal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DspTool.c" />
+    <ClCompile Include="encode.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DspTool.def" />
