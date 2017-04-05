@@ -23,7 +23,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DspTool.c">
+    <ClCompile Include="dsptool.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="encode.c">
@@ -34,7 +34,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DspTool.def">
+    <None Include="dsptool.def">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
