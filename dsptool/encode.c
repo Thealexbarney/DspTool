@@ -5,7 +5,6 @@
 #include <float.h>
 #include <string.h>
 #include "dsptool.h"
-#include "internal.h"
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))

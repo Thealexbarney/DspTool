@@ -18,24 +18,16 @@
     <ClInclude Include="dsptool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="internal.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dsptool.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="encode.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="decode.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dsptool.def">
+    <ClCompile Include="math.c">
       <Filter>Source Files</Filter>
-    </None>
+    </ClCompile>
   </ItemGroup>
 </Project>
