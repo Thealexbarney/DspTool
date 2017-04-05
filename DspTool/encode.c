@@ -33,16 +33,15 @@ void encode(int16_t* src, uint8_t* dst, ADPCMINFO *cxt, uint32_t samples)
 	for (int i = 0; i < frameCount; ++i, pcm += SAMPLES_PER_FRAME, adpcm += BYTES_PER_FRAME)
 	{
 		int32_t sampleCount = MIN(samples - i * SAMPLES_PER_FRAME, SAMPLES_PER_FRAME);
-		int32_t byteCount = getBytesForAdpcmSamples(sampleCount);
+		memset(pcmFrame + 2, 0, SAMPLES_PER_FRAME * sizeof(int16_t));
 		memcpy(pcmFrame + 2, pcm, sampleCount * sizeof(int16_t));
-		memcpy(adpcmFrame, adpcm, byteCount);
 
-		DSPEncodeFrame(pcmFrame, sampleCount, adpcmFrame, (short(*)[2])&coefs[0]);
+		DSPEncodeFrame(pcmFrame, SAMPLES_PER_FRAME, adpcmFrame, (short(*)[2])&coefs[0]);
 
 		pcmFrame[0] = pcmFrame[14];
 		pcmFrame[1] = pcmFrame[15];
 
-		memcpy(adpcm, adpcmFrame, byteCount);
+		memcpy(adpcm, adpcmFrame, getBytesForAdpcmSamples(sampleCount));
 	}
 
 	cxt->gain = 0;
