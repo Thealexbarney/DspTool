@@ -148,6 +148,7 @@
     <ClInclude Include="internal.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="decode.c" />
     <ClCompile Include="DspTool.c" />
     <ClCompile Include="encode.c" />
   </ItemGroup>

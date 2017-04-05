@@ -29,6 +29,9 @@
     <ClCompile Include="encode.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="decode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="DspTool.def">

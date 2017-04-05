@@ -1,10 +1,5 @@
 #include "dsptool.h"
 
-void decode(uint8_t* src, int16_t* dst, ADPCMINFO *cxt, uint32_t samples)
-{
-
-}
-
 void getLoopContext(int16_t *src, ADPCMINFO *cxt, uint32_t samples)
 {
 
