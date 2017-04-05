@@ -1,10 +1,5 @@
 #include "dsptool.h"
 
-void getLoopContext(int16_t *src, ADPCMINFO *cxt, uint32_t samples)
-{
-
-}
-
 uint32_t getBytesForAdpcmBuffer(uint32_t samples)
 {
 	uint32_t frames = samples / SAMPLES_PER_FRAME;
