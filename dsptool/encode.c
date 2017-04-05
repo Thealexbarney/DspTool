@@ -17,7 +17,7 @@ typedef double tvec[3];
 void DSPCorrelateCoefs(const short* source, int samples, short* coefsOut);
 void DSPEncodeFrame(short pcmInOut[16], int sampleCount, unsigned char adpcmOut[8], const short coefsIn[8][2]);
 
-void encode(int16_t* src, uint8_t* dst, ADPCMINFO *cxt, uint32_t samples)
+void encode(int16_t* src, uint8_t* dst, ADPCMINFO* cxt, uint32_t samples)
 {
 	int16_t* coefs = cxt->coef;
 	DSPCorrelateCoefs(src, samples, coefs);

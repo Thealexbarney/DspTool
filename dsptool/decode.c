@@ -29,7 +29,7 @@ inline short Clamp16(int value)
 	return value;
 }
 
-void decode(uint8_t* src, int16_t* dst, ADPCMINFO *cxt, uint32_t samples)
+void decode(uint8_t* src, int16_t* dst, ADPCMINFO* cxt, uint32_t samples)
 {
 	short hist1 = cxt->yn1;
 	short hist2 = cxt->yn2;
@@ -63,7 +63,7 @@ void decode(uint8_t* src, int16_t* dst, ADPCMINFO *cxt, uint32_t samples)
 	}
 }
 
-void getLoopContext(uint8_t *src, ADPCMINFO *cxt, uint32_t samples)
+void getLoopContext(uint8_t* src, ADPCMINFO* cxt, uint32_t samples)
 {
 	short hist1 = cxt->yn1;
 	short hist2 = cxt->yn2;
