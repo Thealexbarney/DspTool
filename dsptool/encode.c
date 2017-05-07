@@ -491,9 +491,9 @@ void DSPEncodeFrame(short pcmInOut[16], int sampleCount, unsigned char adpcmOut[
 				/* Multiply previous */
 				v1 = ((inSamples[i][s] * coefsIn[i][1]) + (inSamples[i][s + 1] * coefsIn[i][0]));
 				/* Evaluate from real sample */
-				v2 = ((pcmInOut[s + 2] << 11) - v1) / 2048;
+				v2 = (pcmInOut[s + 2] << 11) - v1;
 				/* Round to nearest sample */
-				v3 = (v2 > 0) ? (int)((double)v2 / (1 << scale[i]) + 0.4999999f) : (int)((double)v2 / (1 << scale[i]) - 0.4999999f);
+				v3 = (v2 > 0) ? (int)((double)v2 / (1 << scale[i]) / 2048 + 0.4999999f) : (int)((double)v2 / (1 << scale[i]) / 2048 - 0.4999999f);
 
 				/* Clamp sample and set index */
 				if (v3 < -8)
