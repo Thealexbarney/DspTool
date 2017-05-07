@@ -32,6 +32,9 @@ DLLEXPORT void encode(int16_t* src, uint8_t* dst, ADPCMINFO* cxt, uint32_t sampl
 DLLEXPORT void decode(uint8_t* src, int16_t* dst, ADPCMINFO* cxt, uint32_t samples);
 DLLEXPORT void getLoopContext(uint8_t* src, ADPCMINFO* cxt, uint32_t samples);
 
+DLLEXPORT void encodeFrame(int16_t* src, uint8_t* dst, int16_t* coefs, uint8_t one);
+DLLEXPORT void correlateCoefs(int16_t* src, uint32_t samples, int16_t* coefsOut);
+
 DLLEXPORT uint32_t getBytesForAdpcmBuffer(uint32_t samples);
 DLLEXPORT uint32_t getBytesForAdpcmSamples(uint32_t samples);
 DLLEXPORT uint32_t getBytesForPcmBuffer(uint32_t samples);

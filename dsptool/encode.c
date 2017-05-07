@@ -14,13 +14,13 @@
 * 'current' and going 2 backwards
 */
 typedef double tvec[3];
-void DSPCorrelateCoefs(const short* source, int samples, short* coefsOut);
+void correlateCoefs(int16_t* source, uint32_t samples, int16_t* coefsOut);
 void DSPEncodeFrame(short pcmInOut[16], int sampleCount, unsigned char adpcmOut[8], const short coefsIn[8][2]);
 
 void encode(int16_t* src, uint8_t* dst, ADPCMINFO* cxt, uint32_t samples)
 {
 	int16_t* coefs = cxt->coef;
-	DSPCorrelateCoefs(src, samples, coefs);
+	correlateCoefs(src, samples, coefs);
 
 	int32_t frameCount = samples / SAMPLES_PER_FRAME + (samples % SAMPLES_PER_FRAME != 0);
 
@@ -321,7 +321,7 @@ void FilterRecords(tvec vecBest[8], int exp, tvec records[], int recordCount)
 	}
 }
 
-void DSPCorrelateCoefs(const short* source, int samples, short* coefsOut)
+void correlateCoefs(int16_t* source, uint32_t samples, int16_t* coefsOut)
 {
 	int numFrames = (samples + 13) / 14;
 	int frameSamples;
@@ -553,4 +553,9 @@ void DSPEncodeFrame(short pcmInOut[16], int sampleCount, unsigned char adpcmOut[
 	{
 		adpcmOut[y + 1] = (char)((outSamples[bestIndex][y * 2] << 4) | (outSamples[bestIndex][y * 2 + 1] & 0xF));
 	}
+}
+
+void encodeFrame(int16_t* src, uint8_t* dst, int16_t* coefs, uint8_t one)
+{
+	DSPEncodeFrame(src, 14, dst, (short(*)[2])&coefs[0]);
 }
