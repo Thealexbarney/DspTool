@@ -9,10 +9,18 @@ extern "C" {
 #define SAMPLES_PER_FRAME 14
 #define NIBBLES_PER_FRAME 16
 
+#if defined(_WIN32) || defined(_WIN64)
 #ifdef COMPILING_DLL 
 #define DLLEXPORT __declspec(dllexport)
 #else
 #define DLLEXPORT __declspec(dllimport)  
+#endif
+#else
+#ifdef COMPILING_DLL 
+#define DLLEXPORT __attribute__((visibility("default")))
+#else
+#define DLLEXPORT
+#endif
 #endif
 
 typedef struct

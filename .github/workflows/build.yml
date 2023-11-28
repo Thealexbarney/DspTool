@@ -1,0 +1,33 @@
+name: Build
+on: [push, pull_request, workflow_dispatch]
+jobs:
+  linux-macos:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            compiler: gcc
+            config: -shared -o dsptool.so dsptool/decode.c dsptool/encode.c dsptool/math.c
+          - os: macos-latest
+            compiler: clang
+            config: -shared -o dsptool.dylib dsptool/decode.c dsptool/encode.c dsptool/math.c
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Build
+      run: |
+        ${{ matrix.compiler }} ${{ matrix.config }}
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Create 64-bit Release build
+        run: msbuild.exe /p:Configuration=Release /p:Platform=x64 dsptool.sln
+      - name: Create 32-bit Release build
+        run: msbuild.exe /p:Configuration=Release /p:Platform=x86 dsptool.sln
