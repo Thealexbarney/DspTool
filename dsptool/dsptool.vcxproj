@@ -151,11 +151,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="dsptool.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="decode.c" />
     <ClCompile Include="math.c" />
     <ClCompile Include="encode.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="dsptool.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
