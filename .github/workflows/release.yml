@@ -1,0 +1,94 @@
+name: Pack library files on release
+on:
+  release:
+    types: [published]
+jobs:
+  unix:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            compiler: gcc
+            config: -shared -o dsptool.so dsptool/decode.c dsptool/encode.c dsptool/math.c
+            asset_name: dsptool-linux
+          - os: macos-latest
+            compiler: clang
+            config: -shared -o dsptool.dylib dsptool/decode.c dsptool/encode.c dsptool/math.c
+            asset_name: dsptool-macos
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Build the library
+      run: ${{ matrix.compiler }} ${{ matrix.config }}
+    - name: Pack the library files into ZIP and TAR.GZ files
+      shell: bash
+      run: bash .github/workflows/pack_library.sh 1
+    - name: Upload ZIP
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }} 
+        asset_path: ./library/unix/${{ matrix.asset_name }}.zip
+        asset_name: ${{ matrix.asset_name }}.zip
+        asset_content_type: application/zip
+    - name: Upload GZIP
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }} 
+        asset_path: ./library/unix/${{ matrix.asset_name }}.tar.gz
+        asset_name: ${{ matrix.asset_name }}.tar.gz
+        asset_content_type: application/gzip
+  windows:
+    runs-on: [windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
+      - name: Create 64-bit Release build
+        run: msbuild.exe /p:Configuration=Release /p:Platform=x64 dsptool.sln
+      - name: Create 32-bit Release build
+        run: msbuild.exe /p:Configuration=Release /p:Platform=x86 dsptool.sln
+      - name: Pack the library files into ZIP and TAR.GZ files
+        shell: bash
+        run: bash .github/workflows/pack_library.sh 0
+      - name: Upload 64-bit ZIP
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} 
+          asset_path: ./library/windows/dsptool-win64.zip
+          asset_name: dsptool-win64.zip
+          asset_content_type: application/zip
+      - name: Upload 64-bit GZIP
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} 
+          asset_path: ./library/windows/dsptool-win64.tar.gz
+          asset_name: dsptool-win64.tar.gz
+          asset_content_type: application/gzip
+      - name: Upload 32-bit ZIP
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} 
+          asset_path: ./library/windows/dsptool-win32.zip
+          asset_name: dsptool-win32.zip
+          asset_content_type: application/zip
+      - name: Upload 32-bit GZIP
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }} 
+          asset_path: ./library/windows/dsptool-win32.tar.gz
+          asset_name: dsptool-win32.tar.gz
+          asset_content_type: application/gzip

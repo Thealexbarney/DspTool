@@ -5,22 +5,22 @@
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
-inline int DivideByRoundUp(int dividend, int divisor)
+static inline int DivideByRoundUp(int dividend, int divisor)
 {
 	return (dividend + divisor - 1) / divisor;
 }
 
-inline char GetHighNibble(char value)
+static inline char GetHighNibble(char value)
 {
 	return value >> 4 & 0xF;
 }
 
-inline char GetLowNibble(char value)
+static inline char GetLowNibble(char value)
 {
 	return value & 0xF;
 }
 
-inline short Clamp16(int value)
+static inline short Clamp16(int value)
 {
 	if (value > SHRT_MAX)
 		return SHRT_MAX;
